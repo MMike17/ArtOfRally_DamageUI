@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UnityEngine;
 using UnityModManagerNet;
 
@@ -16,6 +17,8 @@ namespace DamageUI
         public static Settings settings;
         public static DamagePanel damagePanel;
 
+        static GameObject damageUIPrefab;
+
         // Called by the mod manager
         static bool Load(ModEntry modEntry)
         {
@@ -27,7 +30,18 @@ namespace DamageUI
             modEntry.OnGUI = (entry) => settings.Draw(entry);
             modEntry.OnSaveGUI = (entry) => settings.Save(entry);
 
-            // TODO : Load UI from bundle
+            Try(() =>
+            {
+                AssetBundle bundle = AssetBundle.LoadFromFile(Path.Combine(modEntry.Path, "damage_ui"));
+
+                if (bundle != null)
+                    damageUIPrefab = bundle.LoadAsset<GameObject>("DamageUI");
+                else
+                    Log("Couldn't load asset bundle \"damage_ui\"");
+
+                if (bundle != null)
+                    Log("Loaded bundle \"damage_ui\"");
+            });
 
             return true;
         }
@@ -35,6 +49,7 @@ namespace DamageUI
         static bool OnToggle(ModEntry modEntry, bool state)
         {
             enabled = state;
+            // TODO : Hide UI when we toggle the mod off
             return true;
         }
 
@@ -60,8 +75,8 @@ namespace DamageUI
             //Transform UIParent = ;
 
             // TODO : spawn and keep reference to UI
-            //new Vector2(settings., settings.)
-            //damagePanel = GameObject.Instantiate(, settings.uiPosition, Quaternion.identity, UIParent);
+            Vector2 screenPos = new Vector2(settings.xPositionPercent * Screen.width, settings.yPositionPercent * Screen.height);
+            //damagePanel = GameObject.Instantiate(damageUIPrefab, screenPos, Quaternion.identity, UIParent);
             //damagePanel.Init(stats.Aspiration != CarSpecs.EngineAspiration.NATURAL);
         }
     }
