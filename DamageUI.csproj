@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DamagePanel.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Patches.cs" />
