@@ -8,13 +8,13 @@ namespace DamageUI
         static DamagePanel instance;
 
         Image body;
-        GameObject engineHolder;
+        Image leftSuspension;
+        Image rightSuspension;
+        Image radiator;
         GameObject engineAndTurboHolder;
         Image engine;
         Image turbo;
-        Image radiator;
         Image gearbox;
-        Image suspensions;
         Image frontLeftWheel;
         Image frontRightWheel;
         Image backLeftWheel;
@@ -24,30 +24,36 @@ namespace DamageUI
         {
             instance = this;
 
-            engineHolder.SetActive(!hasTurbo);
+            // engine swap
+            engineAndTurboHolder = transform.GetChild(4).gameObject;
             engineAndTurboHolder.SetActive(hasTurbo);
+            transform.GetChild(3).gameObject.SetActive(!hasTurbo);
 
-            // TODO : Finish getting all UI refs
+            // get UI refs
             body = transform.GetChild(0).GetComponent<Image>();
-            engine = (hasTurbo ? engineAndTurboHolder.transform.GetChild(0) : engineHolder.transform).GetComponent<Image>();
-            // turbo
-            // radiator
-            // gearbox
-            // suspensions
-            // frontLeftWheel
-            // frontRightWheel
-            // backLeftWheel
-            // backRightWheel
+            leftSuspension = transform.GetChild(1).GetChild(0).GetComponent<Image>();
+            rightSuspension = transform.GetChild(1).GetChild(1).GetComponent<Image>();
+            radiator = transform.GetChild(2).GetComponent<Image>();
+            engine = (hasTurbo ? engineAndTurboHolder.transform.GetChild(0) : transform.GetChild(3)).GetComponent<Image>();
+            turbo = engineAndTurboHolder.transform.GetChild(1).GetComponent<Image>();
+            gearbox = transform.GetChild(5).GetComponent<Image>();
+
+            Transform wheelsHodler = transform.GetChild(6);
+            frontLeftWheel = wheelsHodler.GetChild(0).GetComponent<Image>();
+            frontRightWheel = wheelsHodler.GetChild(1).GetComponent<Image>();
+            backLeftWheel = wheelsHodler.GetChild(2).GetComponent<Image>();
+            backRightWheel = wheelsHodler.GetChild(3).GetComponent<Image>();
 
             // TODO : Do we really start with everything at 100% ?
             // How do I inject the start state of parts here ?
 
             body.color = Settings.GetColor(Main.settings.goodColor);
+            leftSuspension.color = Settings.GetColor(Main.settings.goodColor);
+            rightSuspension.color = Settings.GetColor(Main.settings.goodColor);
+            radiator.color = Settings.GetColor(Main.settings.goodColor);
             engine.color = Settings.GetColor(Main.settings.goodColor);
             turbo.color = Settings.GetColor(Main.settings.goodColor);
-            radiator.color = Settings.GetColor(Main.settings.goodColor);
             gearbox.color = Settings.GetColor(Main.settings.goodColor);
-            suspensions.color = Settings.GetColor(Main.settings.goodColor);
             frontLeftWheel.color = Settings.GetColor(Main.settings.goodColor);
             frontRightWheel.color = Settings.GetColor(Main.settings.goodColor);
             backLeftWheel.color = Settings.GetColor(Main.settings.goodColor);
