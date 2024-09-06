@@ -24,16 +24,21 @@ namespace DamageUI
         }
 
         [Draw(DrawType.PopupList)]
-        public ColorTag goodColor;
+        public ColorTag goodColor = ColorTag.Green;
         [Draw(DrawType.PopupList)]
-        public ColorTag badColor;
+        public ColorTag badColor = ColorTag.Red;
 
-        [Draw(DrawType.Slider, Min = 0, Max = 1)]
-        public float xPositionPercent;
-        [Draw(DrawType.Slider, Min = 0, Max = 1)]
-        public float yPositionPercent;
+        [Draw(DrawType.Slider, Min = 0, Max = 1, Precision = 3)]
+        public float xPositionPercent = 0.17f;
+        [Draw(DrawType.Slider, Min = 0, Max = 1, Precision = 3)]
+        public float yPositionPercent = 0.42f;
 
-        // TODO : Add size controls
+        [Draw(DrawType.Slider, Min = 0.2f, Max = 1.5f, Precision = 2)]
+        public float uiScale = 0.8f;
+
+        public override void Save(ModEntry modEntry) => Save(this, modEntry);
+
+        public void OnChange() => DamagePanel.Refresh();
 
         public static Color GetColor(ColorTag tag)
         {
@@ -64,8 +69,9 @@ namespace DamageUI
             }
         }
 
-        public override void Save(ModEntry modEntry) => Save(this, modEntry);
-
-        public void OnChange() => DamagePanel.Refresh();
+        public static Vector2 GetUISize()
+        {
+            return new Vector2(Main.settings.xPositionPercent * Screen.width, Main.settings.xPositionPercent * Screen.height);
+        }
     }
 }
