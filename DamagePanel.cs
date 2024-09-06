@@ -52,6 +52,8 @@ namespace DamageUI
             frontRightWheel.color = Settings.GetColor(Main.settings.goodColor);
             backLeftWheel.color = Settings.GetColor(Main.settings.goodColor);
             backRightWheel.color = Settings.GetColor(Main.settings.goodColor);
+
+            gameObject.SetActive(Main.enabled);
         }
 
         // TODO : Call this from the event when the car takes damage

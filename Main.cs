@@ -9,8 +9,6 @@ namespace DamageUI
 {
     public class Main
     {
-        // TODO : Add test method to force wheel puncture
-
         public static bool enabled { get; private set; }
 
         public static ModEntry.ModLogger Logger;
@@ -49,7 +47,10 @@ namespace DamageUI
         static bool OnToggle(ModEntry modEntry, bool state)
         {
             enabled = state;
-            // TODO : Hide UI when we toggle the mod off
+
+            if (damagePanel != null)
+                damagePanel.gameObject.SetActive(state);
+
             return true;
         }
 
