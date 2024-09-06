@@ -35,7 +35,7 @@ namespace DamageUI
                 if (bundle != null)
                     damageUIPrefab = bundle.LoadAsset<GameObject>("DamageUI");
                 else
-                    Log("Couldn't load asset bundle \"damage_ui\"");
+                    Error("Couldn't load asset bundle \"damage_ui\"");
 
                 if (bundle != null)
                     Log("Loaded bundle \"damage_ui\"");
@@ -66,19 +66,27 @@ namespace DamageUI
             }
             catch (Exception e)
             {
-                Log(e.ToString());
+                Error(e.ToString());
             }
         }
 
         public static void SpawnUI(Car.CarStats stats)
         {
-            // TODO : What is the parent transform ?
-            //Transform UIParent = ;
+            HudManager hud = GameObject.FindObjectOfType<HudManager>();
 
-            // TODO : spawn and keep reference to UI
+            if (hud == null)
+            {
+                Error("Couldn't find the HUD Manager. Aborting.");
+                return;
+            }
+
+            Transform UIParent = hud.transform.GetChild(0);
             Vector2 screenPos = new Vector2(settings.xPositionPercent * Screen.width, settings.yPositionPercent * Screen.height);
-            //damagePanel = GameObject.Instantiate(damageUIPrefab, screenPos, Quaternion.identity, UIParent);
-            //damagePanel.Init(stats.Aspiration != CarSpecs.EngineAspiration.NATURAL);
+
+            damagePanel = GameObject.Instantiate(damageUIPrefab, screenPos, Quaternion.identity, UIParent).GetComponent<DamagePanel>();
+            damagePanel.Init(stats.Aspiration != CarSpecs.EngineAspiration.NATURAL);
+
+            Log("Spawned Damage UI");
         }
     }
 }
