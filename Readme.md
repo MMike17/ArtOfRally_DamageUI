@@ -1,11 +1,9 @@
 ﻿# Mod Base
 
-<!-- Search and replace <modName> with the name of your mod -->
-
-[![](https://img.shields.io/github/v/release/MMike17/<modName>?label=Download)](https://github.com/MMike17/<modName>/releases/latest)
+[![](https://img.shields.io/github/v/release/MMike17/ArtOfRally_DamageUI?label=Download)](https://github.com/MMike17/ArtOfRally_DamageUI/releases/latest)
 ![](https://img.shields.io/badge/Game%20Version-v1.5.5-blue)
 
-A mod for Art of Rally that [...]
+A mod for Art of Rally that adds special UI to display the damage state of the car.
 
 #### Launcher Support
 
@@ -22,24 +20,24 @@ A mod for Art of Rally that [...]
 ![](https://img.shields.io/badge/XBox-Untested-yellow)
 ![](https://img.shields.io/badge/Switch-Untested-yellow)
 
-## Requirements
+<!-- ## Requirements
 
-This mod requires the "..." that you can find [here](https://github.com/MMike17/<modName>).\
-Latest release [![](https://img.shields.io/github/v/release/MMike17/?label=Real%20car%20names)](https://github.com/MMike17/<modName>/releases/latest)
+This mod requires the "..." that you can find [here](https://github.com/MMike17/ArtOfRally_DamageUI).\
+Latest release [![](https://img.shields.io/github/v/release/MMike17/?label=Real%20car%20names)](https://github.com/MMike17/ArtOfRally_DamageUI/releases/latest) -->
 
 ## Usage
 
 Press Ctrl + F10 to open the mod manager menu.\
-Adjust settings to select [...] you want.\
-By default, the mod [...].
+<!-- Adjust settings to select [...] you want.\ -->
+<!-- By default, the mod [...]. -->
 
-"<settingsName>" will [...].
+<!-- "<settingsName>" will [...]. -->
 
-Disabling the mod in the manager will [...] by default.
+<!-- Disabling the mod in the manager will [...] by default. -->
 
-## Disclaimer
+<!-- ## Disclaimer
 
-[...]
+[...] -->
 
 ## Installation
 
@@ -52,6 +50,6 @@ and drop it into the mod manager's mods page.
 
 ![](Screenshots/.png)
 
-## Acknowledgments
+<!-- ## Acknowledgments
 
-[...]
+[...] -->
