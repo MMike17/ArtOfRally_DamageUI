@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using UnityModManagerNet;
 
 using static UnityModManagerNet.UnityModManager;
@@ -7,10 +8,13 @@ namespace DamageUI
 {
     public class Main
     {
+        // TODO : Add test method to force wheel puncture
+
         public static bool enabled { get; private set; }
 
         public static ModEntry.ModLogger Logger;
         public static Settings settings;
+        public static DamagePanel damagePanel;
 
         // Called by the mod manager
         static bool Load(ModEntry modEntry)
@@ -22,6 +26,8 @@ namespace DamageUI
             modEntry.OnToggle = OnToggle;
             modEntry.OnGUI = (entry) => settings.Draw(entry);
             modEntry.OnSaveGUI = (entry) => settings.Save(entry);
+
+            // TODO : Load UI from bundle
 
             return true;
         }
@@ -46,6 +52,17 @@ namespace DamageUI
             {
                 Log(e.ToString());
             }
+        }
+
+        public static void SpawnUI(Car.CarStats stats)
+        {
+            // TODO : What is the parent transform ?
+            //Transform UIParent = ;
+
+            // TODO : spawn and keep reference to UI
+            //new Vector2(settings., settings.)
+            //damagePanel = GameObject.Instantiate(, settings.uiPosition, Quaternion.identity, UIParent);
+            //damagePanel.Init(stats.Aspiration != CarSpecs.EngineAspiration.NATURAL);
         }
     }
 }
