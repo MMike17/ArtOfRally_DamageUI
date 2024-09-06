@@ -7,7 +7,7 @@ namespace DamageUI
 {
     public class Settings : ModSettings, IDrawable
     {
-        readonly Color Brown = new Color(0.75f, 0.5f, 0.25f);
+        readonly static Color Brown = new Color(0.75f, 0.5f, 0.25f);
 
         public enum ColorTag
         {
@@ -28,7 +28,14 @@ namespace DamageUI
         [Draw(DrawType.PopupList)]
         public ColorTag badColor;
 
-        public Color GetColor(ColorTag tag)
+        [Draw(DrawType.Slider, Min = 0, Max = 1)]
+        public float xPositionPercent;
+        [Draw(DrawType.Slider, Min = 0, Max = 1)]
+        public float yPositionPercent;
+
+        // TODO : Add size controls
+
+        public static Color GetColor(ColorTag tag)
         {
             switch (tag)
             {
@@ -59,10 +66,6 @@ namespace DamageUI
 
         public override void Save(ModEntry modEntry) => Save(this, modEntry);
 
-        public void OnChange()
-        {
-            // change the color in the UI component
-            // refresh the UI component
-        }
+        public void OnChange() => DamagePanel.Refresh();
     }
 }
