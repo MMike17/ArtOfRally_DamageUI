@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HarmonyLib;
+using System;
 using System.IO;
 using UnityEngine;
 using UnityModManagerNet;
@@ -22,6 +23,10 @@ namespace DamageUI
         {
             Logger = modEntry.Logger;
             settings = ModSettings.Load<Settings>(modEntry);
+
+            // Harmony patching
+            Harmony harmony = new Harmony(modEntry.Info.Id);
+            harmony.PatchAll();
 
             // hook in mod manager event
             modEntry.OnToggle = OnToggle;
