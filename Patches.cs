@@ -5,23 +5,6 @@ using static RepairsManagerUI;
 
 namespace DamageUI
 {
-    // Patch model
-    // [HarmonyPatch(typeof(), nameof())]
-    // static class type_method_Patch
-    // {
-    // 	static void Prefix()
-    // 	{
-    // 		//
-    // 	}
-
-    // 	static void Postfix()
-    // 	{
-    // 		//
-    // 	}
-    // }
-
-    // TODO : Patch event when we start race to update repairs (Refresh)
-
     // spawn ui at the start of stage
     [HarmonyPatch(typeof(StageSceneManager), MethodType.Constructor)]
     static class StageSceneManager_Patch
