@@ -211,6 +211,7 @@ namespace DamageUI
             if (instance == null)
                 return;
 
+            instance.transform.localPosition = Settings.GetUIPosition();
             instance.RefreshValues();
         }
 
