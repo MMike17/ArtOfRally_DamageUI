@@ -23,10 +23,9 @@ namespace DamageUI
         Image gearbox;
         Image[] wheels;
 
-        // TODO : Add CanvasGroup and fade animation to hide at start of game
-
         PerformanceDamageManager manager;
         List<Wheel> wheelsData;
+        CanvasGroup group;
         DamageMap bodyMap;
         DamageMap suspensionsMap;
         DamageMap radiatorMap;
@@ -75,6 +74,11 @@ namespace DamageUI
             Main.Try(() =>
             {
                 instance = this;
+
+                group = gameObject.AddComponent<CanvasGroup>();
+                group.alpha = 0;
+                group.blocksRaycasts = false;
+
                 bool hasTurbo = CarManager.GetCarStatsForCar(GameModeManager.GetSeasonDataCurrentGameMode().SelectedCar)
                     .Aspiration != CarSpecs.EngineAspiration.NATURAL;
 
@@ -197,6 +201,8 @@ namespace DamageUI
                 Mathf.Lerp(aV, bV, percent)
             );
         }
+
+        public void PlayAnimation(bool fadeIn) => LeanTween.alphaCanvas(group, fadeIn ? 1 : 0, 0.3f).setEaseOutSine().setIgnoreTimeScale(true);
 
         public static void Refresh()
         {
