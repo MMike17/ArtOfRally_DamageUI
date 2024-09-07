@@ -4,7 +4,7 @@ namespace DamageUI
 {
     // Patch model
     // [HarmonyPatch(typeof(), nameof())]
-    // static class type_method_Patch()
+    // static class type_method_Patch
     // {
     // 	static void Prefix()
     // 	{
@@ -18,6 +18,18 @@ namespace DamageUI
     // }
 
     // TODO : Patch event when a part takes damage / send through the state of the part
-    // TODO : Find the event in which we can plug to decide when we need to spawn
-    // TODo : Patch event when a wheel gets a puncture
+    // TODO : Patch event when a wheel gets a puncture
+
+    // spawn ui at the start of stage
+    [HarmonyPatch(typeof(StageSceneManager), MethodType.Constructor)]
+    static class StageSceneManager_Patch
+    {
+        static void Postfix()
+        {
+            if (!Main.enabled)
+                return;
+
+            Main.Try(() => Main.SpawnUI());
+        }
+    }
 }

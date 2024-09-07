@@ -75,7 +75,7 @@ namespace DamageUI
             }
         }
 
-        public static void SpawnUI(Car.CarStats stats)
+        public static void SpawnUI()
         {
             HudManager hud = GameObject.FindObjectOfType<HudManager>();
 
@@ -88,9 +88,7 @@ namespace DamageUI
             Transform UIParent = hud.transform.GetChild(0);
             Vector2 screenPos = new Vector2(settings.xPositionPercent * Screen.width, settings.yPositionPercent * Screen.height);
 
-            damagePanel = GameObject.Instantiate(damageUIPrefab, screenPos, Quaternion.identity, UIParent).GetComponent<DamagePanel>();
-            damagePanel.Init(stats.Aspiration != CarSpecs.EngineAspiration.NATURAL);
-
+            damagePanel = GameObject.Instantiate(damageUIPrefab, screenPos, Quaternion.identity, UIParent).AddComponent<DamagePanel>();
             Log("Spawned Damage UI");
         }
     }
