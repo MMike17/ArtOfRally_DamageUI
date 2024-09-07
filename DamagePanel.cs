@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,75 +27,102 @@ namespace DamageUI
 
         // TODO : Add CanvasGroup and fade animation to hide at start of game
 
-        void Awake()
+        void Awake() => StartCoroutine(InitWhenReady());
+
+        IEnumerator InitWhenReady()
         {
-            instance = this;
-            transform.localScale = Vector3.one * Main.settings.uiScale;
-            Main.Log("Test 1");
+            GameEntryPoint entry = FindObjectOfType<GameEntryPoint>();
 
-            return;
-
-            // detect turbo
-            PerformanceDamageManager manager = GameEntryPoint.EventManager.playerManager.performanceDamageManager;
-            Main.Log("Test 2");
-
-            FieldInfo info = manager.GetType().GetField("DamageablePartsList", BindingFlags.NonPublic | BindingFlags.Instance);
-            bool hasTurbo = false;
-            Main.Log("Test 3");
-
-            foreach (PerformanceDamage part in (List<PerformanceDamage>)info.GetValue(manager))
+            if (entry == null)
             {
-                if (part is TurboPerformanceDamage)
-                {
-                    hasTurbo = true;
-                    break;
-                }
+                Main.Log("Can't find entry point. Are you sure you're spawning the UI in the right scene ?");
+                yield break;
             }
 
-            Main.Log("Test 4");
+            FieldInfo testInfo = entry.GetType().GetField("eventManager", BindingFlags.Static | BindingFlags.NonPublic);
+            yield return new WaitUntil(() => testInfo.GetValue(entry) != null);
 
-            // engine swap
-            engineAndTurboHolder = transform.GetChild(4).gameObject;
-            engineAndTurboHolder.SetActive(hasTurbo);
-            transform.GetChild(3).gameObject.SetActive(!hasTurbo);
-            Main.Log("Test 5");
+            Init();
+        }
 
-            // get UI refs
-            body = transform.GetChild(0).GetComponent<Image>();
-            leftSuspension = transform.GetChild(1).GetChild(0).GetComponent<Image>();
-            rightSuspension = transform.GetChild(1).GetChild(1).GetComponent<Image>();
-            radiator = transform.GetChild(2).GetComponent<Image>();
-            engine = (hasTurbo ? engineAndTurboHolder.transform.GetChild(0) : transform.GetChild(3)).GetComponent<Image>();
-            turbo = engineAndTurboHolder.transform.GetChild(1).GetComponent<Image>();
-            gearbox = transform.GetChild(5).GetComponent<Image>();
-            Main.Log("Test 6");
+        void Init()
+        {
+            Main.Try(() =>
+            {
+                instance = this;
+                transform.localScale = Vector3.one * Main.settings.uiScale;
 
-            Transform wheelsHodler = transform.GetChild(6);
-            frontLeftWheel = wheelsHodler.GetChild(0).GetComponent<Image>();
-            frontRightWheel = wheelsHodler.GetChild(1).GetComponent<Image>();
-            backLeftWheel = wheelsHodler.GetChild(2).GetComponent<Image>();
-            backRightWheel = wheelsHodler.GetChild(3).GetComponent<Image>();
-            Main.Log("Test 7");
+                // detect turbo
+                PerformanceDamageManager manager = GameEntryPoint.EventManager.playerManager.performanceDamageManager;
+                Main.Log("Test 2");
+                return;
 
-            // set initial colors
-            Color goodColor = Settings.GetColor(Main.settings.goodColor);
-            Color badColor = Settings.GetColor(Main.settings.badColor);
-            Main.Log("Test 8");
+                Main.Log("Has manager : " + (manager != null));
 
-            body.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
-            // TODO : How do I detect suspension state ? (check the aligment tilt)
-            //leftSuspension.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
-            //rightSuspension.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
-            radiator.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.RADIATOR));
-            engine.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.ENGINE));
-            turbo.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.TURBO));
-            gearbox.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.GEARBOX));
-            // TODO : Get state of wheels
-            //frontLeftWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
-            //frontRightWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
-            //backLeftWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
-            //backRightWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
-            Main.Log("Test 9");
+                FieldInfo info = manager.GetType().GetField("DamageablePartsList", BindingFlags.NonPublic | BindingFlags.Instance);
+                bool hasTurbo = false;
+                Main.Log("Test 3");
+                return;
+
+                foreach (PerformanceDamage part in (List<PerformanceDamage>)info.GetValue(manager))
+                {
+                    if (part is TurboPerformanceDamage)
+                    {
+                        hasTurbo = true;
+                        break;
+                    }
+                }
+
+                Main.Log("Test 4");
+                return;
+
+                // engine swap
+                engineAndTurboHolder = transform.GetChild(4).gameObject;
+                engineAndTurboHolder.SetActive(hasTurbo);
+                transform.GetChild(3).gameObject.SetActive(!hasTurbo);
+                Main.Log("Test 5");
+                return;
+
+                // get UI refs
+                body = transform.GetChild(0).GetComponent<Image>();
+                leftSuspension = transform.GetChild(1).GetChild(0).GetComponent<Image>();
+                rightSuspension = transform.GetChild(1).GetChild(1).GetComponent<Image>();
+                radiator = transform.GetChild(2).GetComponent<Image>();
+                engine = (hasTurbo ? engineAndTurboHolder.transform.GetChild(0) : transform.GetChild(3)).GetComponent<Image>();
+                turbo = engineAndTurboHolder.transform.GetChild(1).GetComponent<Image>();
+                gearbox = transform.GetChild(5).GetComponent<Image>();
+                Main.Log("Test 6");
+                return;
+
+                Transform wheelsHodler = transform.GetChild(6);
+                frontLeftWheel = wheelsHodler.GetChild(0).GetComponent<Image>();
+                frontRightWheel = wheelsHodler.GetChild(1).GetComponent<Image>();
+                backLeftWheel = wheelsHodler.GetChild(2).GetComponent<Image>();
+                backRightWheel = wheelsHodler.GetChild(3).GetComponent<Image>();
+                Main.Log("Test 7");
+                return;
+
+                // set initial colors
+                Color goodColor = Settings.GetColor(Main.settings.goodColor);
+                Color badColor = Settings.GetColor(Main.settings.badColor);
+                Main.Log("Test 8");
+                return;
+
+                body.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
+                // TODO : How do I detect suspension state ? (check the aligment tilt)
+                //leftSuspension.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
+                //rightSuspension.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
+                radiator.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.RADIATOR));
+                engine.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.ENGINE));
+                turbo.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.TURBO));
+                gearbox.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.GEARBOX));
+                // TODO : Get state of wheels
+                //frontLeftWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
+                //frontRightWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
+                //backLeftWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
+                //backRightWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
+                Main.Log("Test 9");
+            });
         }
 
         // TODO : Call this from the event when the car takes damage
@@ -153,8 +181,7 @@ namespace DamageUI
                 return;
 
             instance.transform.localPosition = Settings.GetUIPosition();
-            instance.Awake();
-            Main.Log("Refreshed UI");
+            instance.Init();
         }
     }
 }
