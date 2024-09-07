@@ -132,8 +132,8 @@ namespace DamageUI
             turbo.color = LerpHSV(badColor, goodColor, turboMap.GetStatus());
             gearbox.color = LerpHSV(badColor, goodColor, gearboxMap.GetStatus());
 
-            //for (int i = 0; i < wheels.Length; i++)
-            //wheels[i].color = LerpHSV(badColor, goodColor, wheelsData[i].);
+            for (int i = 0; i < wheels.Length; i++)
+                wheels[i].color = LerpHSV(badColor, goodColor, wheelsData[i].tirePuncture ? 1 : 0);
         }
 
         // TODO : Call this from the event when the car takes damage
@@ -145,7 +145,7 @@ namespace DamageUI
         }
 
         // TODO : Call this when the car gets punctured
-        public void PunctureTire(WheelPos position) // int index
+        public void PunctureTire(WheelPos position) // int index // I don't know which one I could use
         {
             // pass this through the call from patch
             // PlayerCollider.wheels
