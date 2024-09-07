@@ -62,7 +62,7 @@ namespace DamageUI
 
         void GeneratePartsMaps()
         {
-            bodyMap = new DamageMap(manager, SystemToRepair.CLEANCAR, 1, 0);
+            bodyMap = new DamageMap(manager, SystemToRepair.CLEANCAR, 0, 1);
             suspensionsMap = new DamageMap(manager, SystemToRepair.SUSPENSION, 0, 1);
             radiatorMap = new DamageMap(manager, SystemToRepair.RADIATOR, 0, 1);
             engineMap = new DamageMap(manager, SystemToRepair.ENGINE, 0, 1);
@@ -105,6 +105,7 @@ namespace DamageUI
                 gearbox = transform.GetChild(5).GetComponent<Image>();
 
                 Transform wheelsHodler = transform.GetChild(6);
+                wheels = new Image[4];
 
                 for (int i = 0; i < 4; i++)
                     wheels[i] = wheelsHodler.GetChild(i).GetComponent<Image>();
@@ -120,28 +121,20 @@ namespace DamageUI
             Color badColor = Settings.GetColor(Main.settings.badColor);
 
             body.color = LerpHSV(badColor, goodColor, bodyMap.GetStatus());
-
-            // alignment is -0.05 <= 0 => 0.05
-            float suspensionState = suspensionsMap.GetStatus() / 2;
-            float alignment = GameModeManager.GetSeasonDataCurrentGameMode().SelectedCar.performancePartsCondition.SteeringAlignment;
-            leftSuspension.color = LerpHSV(badColor, goodColor, (alignment < 0 ? alignment * -10 : 0) + suspensionState);
-            rightSuspension.color = LerpHSV(badColor, goodColor, (alignment > 0 ? alignment * 10 : 0) + suspensionState);
-
+            UpdateSuspensions();
             radiator.color = LerpHSV(badColor, goodColor, radiatorMap.GetStatus());
             engine.color = LerpHSV(badColor, goodColor, engineMap.GetStatus());
             turbo.color = LerpHSV(badColor, goodColor, turboMap.GetStatus());
             gearbox.color = LerpHSV(badColor, goodColor, gearboxMap.GetStatus());
 
             for (int i = 0; i < wheels.Length; i++)
-                wheels[i].color = LerpHSV(badColor, goodColor, wheelsData[i].tirePuncture ? 1 : 0);
+                wheels[i].color = LerpHSV(badColor, goodColor, wheelsData[i].tirePuncture ? 0 : 1);
         }
 
         public void OnPartDamage(SystemToRepair part)
         {
             DamageMap map = null;
             Image ui = null;
-            Color badColor = Settings.GetColor(Main.settings.badColor);
-            Color goodColor = Settings.GetColor(Main.settings.goodColor);
 
             switch (part)
             {
@@ -151,10 +144,7 @@ namespace DamageUI
                     break;
 
                 case SystemToRepair.SUSPENSION:
-                    float suspensionState = suspensionsMap.GetStatus() / 2;
-                    float alignment = GameModeManager.GetSeasonDataCurrentGameMode().SelectedCar.performancePartsCondition.SteeringAlignment;
-                    leftSuspension.color = LerpHSV(badColor, goodColor, (alignment < 0 ? alignment * -10 : 0) + suspensionState);
-                    rightSuspension.color = LerpHSV(badColor, goodColor, (alignment > 0 ? alignment * 10 : 0) + suspensionState);
+                    UpdateSuspensions();
                     break;
 
                 case SystemToRepair.RADIATOR:
@@ -179,7 +169,20 @@ namespace DamageUI
             }
 
             if (ui != null)
-                ui.color = LerpHSV(badColor, goodColor, map.GetStatus());
+                ui.color = LerpHSV(Settings.GetColor(Main.settings.badColor), Settings.GetColor(Main.settings.goodColor), map.GetStatus());
+        }
+
+        void UpdateSuspensions()
+        {
+            // alignment is 0.05 <= 0 => -0.05
+            Color goodColor = Settings.GetColor(Main.settings.goodColor);
+            Color badColor = Settings.GetColor(Main.settings.badColor);
+
+            float suspensionState = suspensionsMap.GetStatus() / 2;
+            float alignment = GameModeManager.GetSeasonDataCurrentGameMode().SelectedCar.performancePartsCondition.SteeringAlignment;
+
+            leftSuspension.color = LerpHSV(badColor, goodColor, suspensionState + Mathf.Lerp(0.5f, 0, Mathf.InverseLerp(0, -0.05f, alignment)));
+            rightSuspension.color = LerpHSV(badColor, goodColor, suspensionState + Mathf.Lerp(0.5f, 0, Mathf.InverseLerp(0, 0.05f, alignment)));
         }
 
         public void OnTirePuncture(Wheel wheel) => SetWheelState(wheelsData.IndexOf(wheel), 0);
