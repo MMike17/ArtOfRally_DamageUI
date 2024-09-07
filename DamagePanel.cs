@@ -54,16 +54,10 @@ namespace DamageUI
 
                 // detect turbo
                 PerformanceDamageManager manager = GameEntryPoint.EventManager.playerManager.performanceDamageManager;
-                Main.Log("Test 2");
-                return;
-
-                Main.Log("Has manager : " + (manager != null));
-
                 FieldInfo info = manager.GetType().GetField("DamageablePartsList", BindingFlags.NonPublic | BindingFlags.Instance);
                 bool hasTurbo = false;
-                Main.Log("Test 3");
-                return;
 
+                // TODO : Turbo detection doesn't work properly
                 foreach (PerformanceDamage part in (List<PerformanceDamage>)info.GetValue(manager))
                 {
                     if (part is TurboPerformanceDamage)
@@ -73,15 +67,10 @@ namespace DamageUI
                     }
                 }
 
-                Main.Log("Test 4");
-                return;
-
                 // engine swap
                 engineAndTurboHolder = transform.GetChild(4).gameObject;
                 engineAndTurboHolder.SetActive(hasTurbo);
                 transform.GetChild(3).gameObject.SetActive(!hasTurbo);
-                Main.Log("Test 5");
-                return;
 
                 // get UI refs
                 body = transform.GetChild(0).GetComponent<Image>();
@@ -91,22 +80,16 @@ namespace DamageUI
                 engine = (hasTurbo ? engineAndTurboHolder.transform.GetChild(0) : transform.GetChild(3)).GetComponent<Image>();
                 turbo = engineAndTurboHolder.transform.GetChild(1).GetComponent<Image>();
                 gearbox = transform.GetChild(5).GetComponent<Image>();
-                Main.Log("Test 6");
-                return;
 
                 Transform wheelsHodler = transform.GetChild(6);
                 frontLeftWheel = wheelsHodler.GetChild(0).GetComponent<Image>();
                 frontRightWheel = wheelsHodler.GetChild(1).GetComponent<Image>();
                 backLeftWheel = wheelsHodler.GetChild(2).GetComponent<Image>();
                 backRightWheel = wheelsHodler.GetChild(3).GetComponent<Image>();
-                Main.Log("Test 7");
-                return;
 
                 // set initial colors
                 Color goodColor = Settings.GetColor(Main.settings.goodColor);
                 Color badColor = Settings.GetColor(Main.settings.badColor);
-                Main.Log("Test 8");
-                return;
 
                 body.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
                 // TODO : How do I detect suspension state ? (check the aligment tilt)
@@ -121,7 +104,6 @@ namespace DamageUI
                 //frontRightWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
                 //backLeftWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
                 //backRightWheel.color = LerpHSV(badColor, goodColor, manager.GetConditionOfPart(SystemToRepair.CLEANCAR));
-                Main.Log("Test 9");
             });
         }
 
