@@ -144,34 +144,13 @@ namespace DamageUI
             //
         }
 
-        // TODO : Call this when the car gets punctured
-        public void PunctureTire(WheelPos position) // int index // I don't know which one I could use
+        public void OnTirePuncture(Wheel wheel) => SetWheelState(wheelsData.IndexOf(wheel), 0);
+
+        public void OnTireRepair(Wheel wheel) => SetWheelState(wheelsData.IndexOf(wheel), 1);
+
+        void SetWheelState(int index, int state)
         {
-            // pass this through the call from patch
-            // PlayerCollider.wheels
-
-            Image selectedWheel = null;
-
-            //switch (position)
-            //{
-            //    case WheelPos.FRONT_LEFT:
-            //        selectedWheel = frontLeftWheel;
-            //        break;
-
-            //    case WheelPos.FRONT_RIGHT:
-            //        selectedWheel = frontRightWheel;
-            //        break;
-
-            //    case WheelPos.REAR_LEFT:
-            //        selectedWheel = backLeftWheel;
-            //        break;
-
-            //    case WheelPos.REAR_RIGHT:
-            //        selectedWheel = backRightWheel;
-            //        break;
-            //}
-
-            selectedWheel.color = LerpHSV(Settings.GetColor(Main.settings.badColor), Settings.GetColor(Main.settings.goodColor), 0);
+            wheels[index].color = LerpHSV(Settings.GetColor(Main.settings.badColor), Settings.GetColor(Main.settings.goodColor), state);
         }
 
         Color LerpHSV(Color a, Color b, float percent)

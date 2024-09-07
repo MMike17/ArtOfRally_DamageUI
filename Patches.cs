@@ -18,7 +18,7 @@ namespace DamageUI
     // }
 
     // TODO : Patch event when a part takes damage / send through the state of the part
-    // TODO : Patch event when a wheel gets a puncture
+    // TODO : Patch event when we start race to update repairs (Refresh)
 
     // spawn ui at the start of stage
     [HarmonyPatch(typeof(StageSceneManager), MethodType.Constructor)]
@@ -32,4 +32,30 @@ namespace DamageUI
             Main.Try(() => Main.SpawnUI());
         }
     }
+
+    [HarmonyPatch(typeof(Wheel), nameof(Wheel.DoTirePuncture))]
+    static class Wheel_DoTirePuncture_Patch
+    {
+        static void Postfix(Wheel __instance)
+        {
+            if (!Main.enabled)
+                return;
+
+            Main.Try(() => Main.damagePanel.OnTirePuncture(__instance));
+        }
+    }
+
+    [HarmonyPatch(typeof(Wheel), nameof(Wheel.RepairTirePunctureOrOffRim))]
+    static class Wheel_RepairTirePunctureOrOffRim_Patch
+    {
+        static void Postfix(Wheel __instance)
+        {
+            if (!Main.enabled)
+                return;
+
+            Main.Try(() => Main.damagePanel.OnTireRepair(__instance));
+        }
+    }
+
+    // 
 }
