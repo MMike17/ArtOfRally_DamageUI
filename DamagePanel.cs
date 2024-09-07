@@ -37,6 +37,12 @@ namespace DamageUI
 
         IEnumerator InitWhenReady()
         {
+            // this is here so we don't have the glitch
+            group = gameObject.AddComponent<CanvasGroup>();
+            group.alpha = 0;
+            group.blocksRaycasts = false;
+
+            // check manager availability
             GameEntryPoint entry = FindObjectOfType<GameEntryPoint>();
 
             if (entry == null)
@@ -74,10 +80,6 @@ namespace DamageUI
             Main.Try(() =>
             {
                 instance = this;
-
-                group = gameObject.AddComponent<CanvasGroup>();
-                group.alpha = 0;
-                group.blocksRaycasts = false;
 
                 bool hasTurbo = CarManager.GetCarStatsForCar(GameModeManager.GetSeasonDataCurrentGameMode().SelectedCar)
                     .Aspiration != CarSpecs.EngineAspiration.NATURAL;
