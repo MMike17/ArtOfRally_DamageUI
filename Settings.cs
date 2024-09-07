@@ -69,7 +69,7 @@ namespace DamageUI
             }
         }
 
-        public static Vector2 GetUISize()
+        public static Vector2 GetUIPosition()
         {
             return new Vector2(Main.settings.xPositionPercent * Screen.width, Main.settings.xPositionPercent * Screen.height);
         }

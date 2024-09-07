@@ -23,7 +23,7 @@ namespace DamageUI
         public void Init(bool hasTurbo)
         {
             instance = this;
-            transform.localPosition = Vector2.one * Settings.GetUISize();
+            transform.localPosition = Vector2.one * Settings.GetUIPosition();
 
             // engine swap
             engineAndTurboHolder = transform.GetChild(4).gameObject;
@@ -106,7 +106,7 @@ namespace DamageUI
                 return;
 
             instance.transform.localScale = Vector2.one * Main.settings.uiScale;
-            instance.transform.localPosition = Settings.GetUISize();
+            instance.transform.localPosition = Settings.GetUIPosition();
 
             // TODO : Get states of parts
             // TODO : Set colors of UI
