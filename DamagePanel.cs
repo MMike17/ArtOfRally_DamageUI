@@ -75,20 +75,8 @@ namespace DamageUI
             Main.Try(() =>
             {
                 instance = this;
-
-                // detect turbo
-                FieldInfo info = manager.GetType().GetField("DamageablePartsList", BindingFlags.NonPublic | BindingFlags.Instance);
-                bool hasTurbo = false;
-
-                // TODO : Turbo detection doesn't work properly
-                foreach (PerformanceDamage part in (List<PerformanceDamage>)info.GetValue(manager))
-                {
-                    if (part is TurboPerformanceDamage)
-                    {
-                        hasTurbo = true;
-                        break;
-                    }
-                }
+                bool hasTurbo = CarManager.GetCarStatsForCar(GameModeManager.GetSeasonDataCurrentGameMode().SelectedCar)
+                    .Aspiration != CarSpecs.EngineAspiration.NATURAL;
 
                 // engine swap
                 engineAndTurboHolder = transform.GetChild(4).gameObject;
