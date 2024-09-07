@@ -2,8 +2,10 @@
 	"Id": "DamageUI",
 	"DisplayName": "Damage UI",
 	"Author": "MMike17",
-	"Version": "0.9.0",
+	"Version": "1.0.0",
 	"GameVersion": "1.5,5",
 	"AssemblyName": "DamageUI.dll",
-	"EntryMethod": "DamageUI.Main.Load"
+	"EntryMethod": "DamageUI.Main.Load",
+	"HomePage": "https://www.nexusmods.com/artofrally/mods/12",
+	"Repository": "https://github.com/MMike17/ArtOfRally_DamageUI"
 }
