@@ -1,4 +1,7 @@
 using HarmonyLib;
+using System;
+
+using static RepairsManagerUI;
 
 namespace DamageUI
 {
@@ -17,7 +20,6 @@ namespace DamageUI
     // 	}
     // }
 
-    // TODO : Patch event when a part takes damage / send through the state of the part
     // TODO : Patch event when we start race to update repairs (Refresh)
 
     // spawn ui at the start of stage
@@ -57,5 +59,42 @@ namespace DamageUI
         }
     }
 
-    // 
+    [HarmonyPatch(typeof(PerformanceDamage), nameof(PerformanceDamage.UpdatePerformanceDamage))]
+    static class PerformanceDamage_UpdatePerformanceDamage_Patch
+    {
+        static void Postfix(PerformanceDamage __instance)
+        {
+            if (!Main.enabled)
+                return;
+
+            Main.Try(() => Main.damagePanel.OnPartDamage(GetPart(__instance)));
+        }
+
+        static SystemToRepair GetPart(PerformanceDamage part)
+        {
+            switch (part)
+            {
+                case AerodynamicsPerformanceDamage body:
+                    return SystemToRepair.CLEANCAR;
+
+                case SteeringPerfomanceDamage suspension:
+                    return SystemToRepair.SUSPENSION;
+
+                case RadiatorPerformanceDamage radiator:
+                    return SystemToRepair.RADIATOR;
+
+                case EnginePerformanceDamage engine:
+                    return SystemToRepair.ENGINE;
+
+                case TurboPerformanceDamage turbo:
+                    return SystemToRepair.TURBO;
+
+                case TransmissionPerformanceDamage gearbox:
+                    return SystemToRepair.GEARBOX;
+
+                default:
+                    throw new Exception("Didn't recognize the part");
+            }
+        }
+    }
 }

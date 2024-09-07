@@ -136,12 +136,50 @@ namespace DamageUI
                 wheels[i].color = LerpHSV(badColor, goodColor, wheelsData[i].tirePuncture ? 1 : 0);
         }
 
-        // TODO : Call this from the event when the car takes damage
-        public void Damage(SystemToRepair part, float amount)
+        public void OnPartDamage(SystemToRepair part)
         {
-            // check PerformanceDamageManager.GetConditionOfPart
+            DamageMap map = null;
+            Image ui = null;
+            Color badColor = Settings.GetColor(Main.settings.badColor);
+            Color goodColor = Settings.GetColor(Main.settings.goodColor);
 
-            //
+            switch (part)
+            {
+                case SystemToRepair.CLEANCAR:
+                    map = bodyMap;
+                    ui = body;
+                    break;
+
+                case SystemToRepair.SUSPENSION:
+                    float suspensionState = suspensionsMap.GetStatus() / 2;
+                    float alignment = GameModeManager.GetSeasonDataCurrentGameMode().SelectedCar.performancePartsCondition.SteeringAlignment;
+                    leftSuspension.color = LerpHSV(badColor, goodColor, (alignment < 0 ? alignment * -10 : 0) + suspensionState);
+                    rightSuspension.color = LerpHSV(badColor, goodColor, (alignment > 0 ? alignment * 10 : 0) + suspensionState);
+                    break;
+
+                case SystemToRepair.RADIATOR:
+                    map = radiatorMap;
+                    ui = radiator;
+                    break;
+
+                case SystemToRepair.ENGINE:
+                    map = engineMap;
+                    ui = engine;
+                    break;
+
+                case SystemToRepair.TURBO:
+                    map = turboMap;
+                    ui = turbo;
+                    break;
+
+                case SystemToRepair.GEARBOX:
+                    map = gearboxMap;
+                    ui = gearbox;
+                    break;
+            }
+
+            if (ui != null)
+                ui.color = LerpHSV(badColor, goodColor, map.GetStatus());
         }
 
         public void OnTirePuncture(Wheel wheel) => SetWheelState(wheelsData.IndexOf(wheel), 0);
