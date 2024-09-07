@@ -28,13 +28,13 @@ namespace DamageUI
         [Draw(DrawType.PopupList)]
         public ColorTag badColor = ColorTag.Red;
 
+        [Draw(DrawType.Slider, Min = -1, Max = 1, Precision = 3)]
+        public float xPositionPercent = 0.9f;
         [Draw(DrawType.Slider, Min = 0, Max = 1, Precision = 3)]
-        public float xPositionPercent = 0.17f;
-        [Draw(DrawType.Slider, Min = 0, Max = 1, Precision = 3)]
-        public float yPositionPercent = 0.42f;
+        public float yPositionPercent = 0.1f;
 
-        [Draw(DrawType.Slider, Min = 0.2f, Max = 1.5f, Precision = 2)]
-        public float uiScale = 0.8f;
+        [Draw(DrawType.Slider, Min = 0.1f, Max = 1f, Precision = 2)]
+        public float uiScale = 0.3f;
 
         public override void Save(ModEntry modEntry) => Save(this, modEntry);
 
@@ -71,7 +71,7 @@ namespace DamageUI
 
         public static Vector2 GetUIPosition()
         {
-            return new Vector2(Main.settings.xPositionPercent * Screen.width, Main.settings.yPositionPercent * Screen.height);
+            return new Vector2(Main.settings.xPositionPercent * Screen.width / 2, Main.settings.yPositionPercent * Screen.height);
         }
     }
 }
