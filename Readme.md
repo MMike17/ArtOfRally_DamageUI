@@ -35,20 +35,43 @@ By default, the mod places the UI on the bottom left of the screen with green to
 
 Disabling the mod in the manager will hide the UI by default.
 
+### Car parts
+
+#### Body
+![Body](Screenshots/Body.png)
+
+#### Wheels
+![Body](Screenshots/Wheels.png)
+
+#### Radiator
+![Body](Screenshots/Radiator.png)
+
+#### Suspensions
+![Body](Screenshots/Suspensions.png)
+
+#### Engine
+![Body](Screenshots/Engine.png)
+
+#### Turbo
+![Body](Screenshots/Turbo.png)
+
+#### Transmission
+![Body](Screenshots/Transmission.png)
+
 ### Available colors
 
 The available colors for the UI are :
 
-- White
-- Grey
-- Black
-- Red
-- Green
-- Blue
-- Yellow
-- Magenta
-- Cyan
-- Brown
+- <span style="color:White">White</span>
+- <span style="color:Grey">Grey</span>
+- <span style="color:Black">Black</span>
+- <span style="color:Red">Red</span>
+- <span style="color:Green">Green</span>
+- <span style="color:Blue">Blue</span>
+- <span style="color:Yellow">Yellow</span>
+- <span style="color:Magenta">Magenta</span>
+- <span style="color:Cyan">Cyan</span>
+- <span style="color:Brown">Brown</span>
 
 ## Installation
 
