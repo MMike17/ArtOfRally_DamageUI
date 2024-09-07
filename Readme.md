@@ -20,36 +20,46 @@ A mod for Art of Rally that adds special UI to display the damage state of the c
 ![](https://img.shields.io/badge/XBox-Untested-yellow)
 ![](https://img.shields.io/badge/Switch-Untested-yellow)
 
-<!-- ## Requirements
-
-This mod requires the "..." that you can find [here](https://github.com/MMike17/ArtOfRally_DamageUI).\
-Latest release [![](https://img.shields.io/github/v/release/MMike17/?label=Real%20car%20names)](https://github.com/MMike17/ArtOfRally_DamageUI/releases/latest) -->
-
 ## Usage
 
 Press Ctrl + F10 to open the mod manager menu.\
-<!-- Adjust settings to select [...] you want.\ -->
-<!-- By default, the mod [...]. -->
+Adjust settings to select the colors you want for the UI, its placement and its size.\
 
-<!-- "<settingsName>" will [...]. -->
+By default, the mod places the UI on the bottom left of the screen with green to red UI colors.
 
-<!-- Disabling the mod in the manager will [...] by default. -->
+"goodColor" will set the color of the parts in a good state.\
+"badColor" will set the color of the parts in a bad state.\
+"xPositionPercent" will move the UI horizontally.\
+"yPositionPercent" will move the UI vertically.\
+"uiScale" will change the size of the UI.
 
-<!-- ## Disclaimer
+Disabling the mod in the manager will hide the UI by default.
 
-[...] -->
+### Available colors
+
+The available colors for the UI are :
+
+- White
+- Grey
+- Black
+- Red
+- Green
+- Blue
+- Yellow
+- Magenta
+- Cyan
+- Brown
 
 ## Installation
 
 Follow the [installation guide](https://www.nexusmods.com/site/mods/21/) of
 the Unity Mod Manager.\
-Then simply download the [latest release](https://www.nexusmods.com/artofrally/mods/<nexusModID>)
+Then simply download the [latest release](https://www.nexusmods.com/artofrally/mods/12)
 and drop it into the mod manager's mods page.
 
 ## Showcase
 
-![](Screenshots/.png)
-
-<!-- ## Acknowledgments
-
-[...] -->
+![](Screenshots/GreeRed.png)
+![](Screenshots/WhiteRed.png)
+![](Screenshots/CyanMagenta.png)
+![](Screenshots/Settings.png)
