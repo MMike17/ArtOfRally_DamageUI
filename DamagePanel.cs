@@ -139,7 +139,6 @@ namespace DamageUI
 
                 case SystemToRepair.SUSPENSION:
                     UpdateSuspensions();
-                    Main.Log(part + " damaged to " + Mathf.RoundToInt(suspensionsMap.GetStatus() / 2 * 100) + "%");
                     break;
 
                 case SystemToRepair.RADIATOR:
@@ -164,10 +163,7 @@ namespace DamageUI
             }
 
             if (ui != null)
-            {
                 ui.color = LerpHSV(Settings.GetColor(Main.settings.badColor), Settings.GetColor(Main.settings.goodColor), map.GetStatus());
-                Main.Log(part + " damaged to " + Mathf.RoundToInt(map.GetStatus() * 100) + "%");
-            }
         }
 
         void UpdateSuspensions()

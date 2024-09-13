@@ -36,6 +36,10 @@ namespace DamageUI
         [Draw(DrawType.Slider, Min = 0.1f, Max = 1f, Precision = 2)]
         public float uiScale = 0.3f;
 
+        [Header("Debug")]
+        [Draw(DrawType.Toggle)]
+        public bool disableInfoLogs;
+
         public override void Save(ModEntry modEntry) => Save(this, modEntry);
 
         public void OnChange() => DamagePanel.Refresh();

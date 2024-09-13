@@ -42,7 +42,7 @@ namespace DamageUI
                 else
                     Error("Couldn't load asset bundle \"damage_ui\"");
 
-                if (bundle != null)
+                if (bundle != null && !settings.disableInfoLogs)
                     Log("Loaded bundle \"damage_ui\"");
             });
 
@@ -89,7 +89,9 @@ namespace DamageUI
             Vector2 screenPos = new Vector2(settings.xPositionPercent * Screen.width, settings.yPositionPercent * Screen.height);
 
             damagePanel = GameObject.Instantiate(damageUIPrefab, screenPos, Quaternion.identity, UIParent).AddComponent<DamagePanel>();
-            Log("Spawned Damage UI");
+
+            if (!settings.disableInfoLogs)
+                Log("Spawned Damage UI");
         }
     }
 }
