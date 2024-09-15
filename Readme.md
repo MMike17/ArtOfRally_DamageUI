@@ -1,4 +1,4 @@
-﻿# Mod Base
+﻿# Damage UI
 
 [![](https://img.shields.io/github/v/release/MMike17/ArtOfRally_DamageUI?label=Download)](https://github.com/MMike17/ArtOfRally_DamageUI/releases/latest)
 ![](https://img.shields.io/badge/Game%20Version-v1.5.5-blue)
