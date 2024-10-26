@@ -27,6 +27,13 @@ Adjust settings to select the colors you want for the UI, its placement and its 
 
 By default, the mod places the UI on the bottom left of the screen with green to red UI colors.
 
+### Support
+
+The game does not support car damage in Freeroam mode.
+All other game modes should be supported by this mod.
+
+### Settings
+
 "goodColor" will set the color of the parts in a good state.\
 "badColor" will set the color of the parts in a bad state.\
 "xPositionPercent" will move the UI horizontally.\
