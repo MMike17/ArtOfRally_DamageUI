@@ -23,9 +23,9 @@ namespace DamageUI
             Brown
         }
 
-        [Draw(DrawType.PopupList)]
+        [Draw(DrawType.Auto)]
         public ColorTag goodColor = ColorTag.Green;
-        [Draw(DrawType.PopupList)]
+        [Draw(DrawType.Auto)]
         public ColorTag badColor = ColorTag.Red;
 
         [Draw(DrawType.Slider, Min = -1, Max = 1, Precision = 3)]
