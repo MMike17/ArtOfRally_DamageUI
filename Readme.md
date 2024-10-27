@@ -34,11 +34,11 @@ All other game modes should be supported by this mod.
 
 ### Settings
 
-"goodColor" will set the color of the parts in a good state.\
-"badColor" will set the color of the parts in a bad state.\
-"xPositionPercent" will move the UI horizontally.\
-"yPositionPercent" will move the UI vertically.\
-"uiScale" will change the size of the UI.
+- **goodColor** : will set the color of the parts in a good state.\
+- **badColor** : will set the color of the parts in a bad state.\
+- **xPositionPercent** : will move the UI horizontally.\
+- **yPositionPercent** : will move the UI vertically.\
+- **uiScale** : will change the size of the UI.
 
 Disabling the mod in the manager will hide the UI by default.
 
@@ -79,6 +79,13 @@ The available colors for the UI are :
 - <span style="color:Magenta">Magenta</span>
 - <span style="color:Cyan">Cyan</span>
 - <span style="color:Brown">Brown</span>
+
+## Known issues
+
+The UI might not show on start of race.
+
+A possible fix is to change the **uiScale** while in a race (any gamemode other than Freeroam).\
+Another fix would be to open and close the pause menu.
 
 ## Installation
 
