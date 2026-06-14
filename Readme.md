@@ -29,7 +29,7 @@ By default, the mod places the UI on the bottom left of the screen with green to
 
 ### Support
 
-The game does not support car damage in Freeroam mode.
+The game does not support car damage in Freeroam and Time attack mode.
 All other game modes should be supported by this mod.
 
 ### Settings
