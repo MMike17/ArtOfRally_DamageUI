@@ -38,7 +38,7 @@ namespace DamageUI
 
         [Header("Debug")]
         [Draw(DrawType.Toggle)]
-        public bool disableInfoLogs;
+        public bool disableInfoLogs = true;
 
         public override void Save(ModEntry modEntry) => Save(this, modEntry);
 
