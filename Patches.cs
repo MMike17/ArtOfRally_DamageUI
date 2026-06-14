@@ -34,7 +34,7 @@ namespace DamageUI
             if (!Main.enabled)
                 return;
 
-            Main.Try(() => Main.damagePanel.PlayAnimation(true));
+            Main.Try(() => Main.damagePanel?.PlayAnimation(true));
         }
     }
 
@@ -47,7 +47,7 @@ namespace DamageUI
             if (!Main.enabled)
                 return;
 
-            Main.Try(() => Main.damagePanel.PlayAnimation(false));
+            Main.Try(() => Main.damagePanel?.PlayAnimation(false));
         }
     }
 
@@ -60,7 +60,7 @@ namespace DamageUI
             if (!Main.enabled)
                 return;
 
-            Main.Try(() => Main.damagePanel.OnTirePuncture(__instance));
+            Main.Try(() => Main.damagePanel?.OnTirePuncture(__instance));
         }
     }
 
@@ -73,7 +73,7 @@ namespace DamageUI
             if (!Main.enabled)
                 return;
 
-            Main.Try(() => Main.damagePanel.OnTireRepair(__instance));
+            Main.Try(() => Main.damagePanel?.OnTireRepair(__instance));
         }
     }
 
@@ -86,7 +86,7 @@ namespace DamageUI
             if (!Main.enabled)
                 return;
 
-            Main.Try(() => Main.damagePanel.OnPartDamage(GetPart(__instance)));
+            Main.Try(() => Main.damagePanel?.OnPartDamage(GetPart(__instance)));
         }
 
         static SystemToRepair GetPart(PerformanceDamage part)

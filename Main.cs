@@ -77,6 +77,10 @@ namespace DamageUI
 
         public static void SpawnUI()
         {
+            if (GameModeManager.GameMode == GameModeManager.GAME_MODES.FREEROAM ||
+                GameModeManager.GameMode == GameModeManager.GAME_MODES.TIME_ATTACK)
+                return;
+
             HudManager hud = GameObject.FindObjectOfType<HudManager>();
 
             if (hud == null)
