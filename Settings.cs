@@ -29,12 +29,12 @@ namespace DamageUI
         public ColorTag badColor = ColorTag.Red;
 
         [Draw(DrawType.Slider, Min = -1, Max = 1, Precision = 3)]
-        public float xPositionPercent = 0.9f;
+        public float xPositionPercent = -0.6f;
         [Draw(DrawType.Slider, Min = 0, Max = 1, Precision = 3)]
         public float yPositionPercent = 0.1f;
 
         [Draw(DrawType.Slider, Min = 0.1f, Max = 1f, Precision = 2)]
-        public float uiScale = 0.3f;
+        public float uiScale = 0.35f;
 
         [Header("Debug")]
         [Draw(DrawType.Toggle)]
@@ -43,6 +43,20 @@ namespace DamageUI
         public override void Save(ModEntry modEntry) => Save(this, modEntry);
 
         public void OnChange() => DamagePanel.Refresh();
+
+        public void OnGUI()
+        {
+            if (GUILayout.Button("Reset settings", GUILayout.Width(200)))
+            {
+                goodColor = ColorTag.Green;
+                badColor = ColorTag.Red;
+                xPositionPercent = -0.6f;
+                yPositionPercent = 0.1f;
+                uiScale = 0.35f;
+
+                OnChange();
+            }
+        }
 
         public static Color GetColor(ColorTag tag)
         {

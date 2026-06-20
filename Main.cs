@@ -30,7 +30,11 @@ namespace DamageUI
 
             // hook in mod manager event
             modEntry.OnToggle = OnToggle;
-            modEntry.OnGUI = (entry) => settings.Draw(entry);
+            modEntry.OnGUI = (entry) =>
+            {
+                settings.Draw(entry);
+                settings.OnGUI();
+            };
             modEntry.OnSaveGUI = (entry) => settings.Save(entry);
 
             Try(() =>
