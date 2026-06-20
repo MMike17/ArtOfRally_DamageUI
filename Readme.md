@@ -34,11 +34,12 @@ All other game modes should be supported by this mod.
 
 ### Settings
 
-- **goodColor** : will set the color of the parts in a good state.\
-- **badColor** : will set the color of the parts in a bad state.\
-- **xPositionPercent** : will move the UI horizontally.\
-- **yPositionPercent** : will move the UI vertically.\
+- **goodColor** : will set the color of the parts in a good state.
+- **badColor** : will set the color of the parts in a bad state.
+- **xPositionPercent** : will move the UI horizontally.
+- **yPositionPercent** : will move the UI vertically.
 - **uiScale** : will change the size of the UI.
+- **Reset settings** : will reset the values of all settings. 
 
 Disabling the mod in the manager will hide the UI by default.
 
